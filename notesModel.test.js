@@ -1,4 +1,4 @@
-const NotesModel = require('./notesModel')
+const NotesModel = require('./notesModel');
 
 describe('NotesModel', () => {
 
@@ -9,12 +9,13 @@ describe('NotesModel', () => {
   });
 
   it('adds a note', () => {
-    model.addNote('Buy milk')
+    model.addNote('Buy milk');
     expect(model.getNotes()).toContain('Buy milk');
   });
 
   it('empties the notes', () => {
-    model.reset()
+    notes.addNote('Buy milk');
+    model.reset();
     expect(model.reset()).toEqual([]);
   });
 });

@@ -4,4 +4,7 @@
 //
 // on Mac (using Chrome), use Option+Command+J to open the console and see this message.
 
+const NotesModel = require('./notesModel');
+const noteOne = new NotesModel();
 console.log('The notes app is running');
+console.log(noteOne.getNotes());
