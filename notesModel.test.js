@@ -2,20 +2,20 @@ const NotesModel = require('./notesModel');
 
 describe('NotesModel', () => {
 
-  const notes = new NotesModel();
+  const model = new NotesModel();
 
   it('returns an "[]" ', () => {
-    expect(notes.getNotes()).toEqual([]);
+    expect(model.getNotes()).toEqual([]);
   });
 
   it('adds a note', () => {
-    notes.addNote('Buy milk');
-    expect(notes.getNotes()).toContain('Buy milk');
+    model.addNote('Buy milk');
+    expect(model.getNotes()).toContain('Buy milk');
   });
 
   it('empties the notes', () => {
-    notes.addNote('Buy milk');
-    notes.reset();
-    expect(notes.getNotes()).toEqual([]);
+    model.addNote('Buy milk');
+    model.reset();
+    expect(model.getNotes()).toEqual([]);
   });
 });
