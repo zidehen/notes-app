@@ -34,8 +34,9 @@
           this.mainContainerEl = document.querySelector("#main-container");
           this.buttonEl = document.querySelector("#add-note-btn");
           this.buttonEl.addEventListener("click", () => {
-            const newNote = document.querySelector("#add-note-input").value;
-            this.addNewNote(newNote);
+            let newNote = document.querySelector("#add-note-input");
+            this.addNewNote(newNote.value);
+            newNote.value = null;
           });
         }
         addNewNote(newNote) {
