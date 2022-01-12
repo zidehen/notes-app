@@ -43,6 +43,7 @@
           this.displayNotes();
         }
         displayNotes() {
+          document.querySelectorAll("div.note").forEach((note) => note.remove());
           const notes = this.model.getNotes();
           notes.forEach((note) => {
             const noteEl = document.createElement("div");
