@@ -58,11 +58,27 @@
     }
   });
 
+  // notesApi.js
+  var require_notesApi = __commonJS({
+    "notesApi.js"(exports, module) {
+      var NotesApi2 = class {
+        loadNotes(callback) {
+          fetch("http://localhost:3000/notes").then((response) => response.json()).then((data) => callback(data));
+        }
+      };
+      module.exports = NotesApi2;
+    }
+  });
+
   // index.js
   var NotesModel = require_notesModel();
   var NotesView = require_notesView();
+  var NotesApi = require_notesApi();
   var model = new NotesModel();
-  model.addNote("This is an example note");
   var view = new NotesView(model);
-  view.displayNotes();
+  var api = new NotesApi();
+  api.loadNotes((notes) => {
+    model.addNote(notes);
+    view.displayNotes();
+  });
 })();
