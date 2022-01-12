@@ -5,6 +5,14 @@
 // on Mac (using Chrome), use Option+Command+J to open the console and see this message.
 
 const NotesModel = require('./notesModel');
-const noteOne = new NotesModel();
-console.log('The notes app is running');
-console.log(noteOne.getNotes());
+const NotesView = require('./notesView');
+
+const model = new NotesModel();
+model.addNote('This is an example note');
+
+const view = new NotesView(model)
+view.displayNotes()
+
+
+
+
