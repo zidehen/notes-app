@@ -12,15 +12,18 @@ describe('NotesApi class', () => {
       expect(info.note).toEqual('Go to the gym');
     });
   });
+  
   it('createNote should post a note to the server', () => {
     const api = new NotesApi()
     fetch.mockResponseOnce(JSON.stringify({
       note: 'Go to the cinema'
     }));
-    api.createNote('Go to the cinema', (sendingInfo) => {
-      console.log(sendingInfo)
+    api.createNote({content: 'Go to the cinema'}, (sendingInfo) => {
+      (sendingInfo);
     })
-    // refresh the page
+    fetch.mockResponseOnce(JSON.stringify({
+      note: 'Go to the cinema'
+    }));
     api.loadNotes((info) => {
       expect(info.note).toEqual('Go to the cinema');
     });
