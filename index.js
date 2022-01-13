@@ -10,12 +10,19 @@ const NotesApi = require('./notesApi');
 
 const model = new NotesModel();
 
-const view = new NotesView(model)
-
 const api = new NotesApi();
+
+const view = new NotesView(model, api)
+
+
 
 api.loadNotes((notes) => {
   model.addNote(notes);
   view.displayNotes();
 });
+
+// api.createNote({ content: 'Go Swimming'}, (note) => {
+//   model.addNote(note);
+//   view.displayNotes();
+// })
 
