@@ -14,17 +14,9 @@ const api = new NotesApi();
 
 const view = new NotesView(model, api)
 
-
-
 api.loadNotes((notes) => {
   notes.forEach(note => {
     model.addNote(note);  
   });
   view.displayNotes();
 });
-
-// api.createNote({ content: 'Go Swimming'}, (note) => {
-//   model.addNote(note);
-//   view.displayNotes();
-// })
-

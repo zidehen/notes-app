@@ -16,7 +16,7 @@ class NotesView {
   
   addNewNote(newNote) {
     this.model.addNote(newNote);
-    this.api.createNote({ content: newNote }, (data) => (data));
+    this.api.createNote({ content: newNote });
     this.displayNotes();
   }
 

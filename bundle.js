@@ -42,7 +42,7 @@
         }
         addNewNote(newNote) {
           this.model.addNote(newNote);
-          this.api.createNote({ content: newNote }, (data) => data);
+          this.api.createNote({ content: newNote });
           this.displayNotes();
         }
         displayNotes() {
@@ -69,7 +69,7 @@
             console.error("Error", error);
           });
         }
-        createNote(note, callback) {
+        createNote(note) {
           fetch("http://localhost:3000/notes", {
             method: "POST",
             headers: {
@@ -78,8 +78,6 @@
             body: JSON.stringify(note)
           }).then((response) => {
             return response.json();
-          }).then((data) => {
-            callback(data);
           }).catch((error) => {
             console.error("Error", error);
           });

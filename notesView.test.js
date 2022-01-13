@@ -11,44 +11,36 @@ require('jest-fetch-mock').enableMocks()
 
 describe('Notes view', () => {
   
-  it('adds a note', () => {
-    document.body.innerHTML = fs.readFileSync('./index.html');
-    const model = new NotesModel();
-    const api = new NotesApi();
-    const view = new NotesView(model, api)
+  let model;
+  let api;
+  let view;
+  
+  let inputEl;
+  let buttonEl;
 
+  beforeEach(() => {
+    document.body.innerHTML = fs.readFileSync('./index.html');
+    model = new NotesModel();
+    api = new NotesApi();
+    view = new NotesView(model, api);
+
+    inputEl = document.querySelector('#add-note-input');
+    inputEl.value = 'Go food shopping'
+
+    buttonEl = document.querySelector('#add-note-btn');
     fetch.mockResponseOnce(JSON.stringify({
       note: 'Go to the gym'
     }));
-
-    const inputEl = document.querySelector('#add-note-input');
-    inputEl.value = 'Go food shopping'
-
-    const buttonEl = document.querySelector('#add-note-btn');
     buttonEl.click();
+  });
 
+  it('adds a note', () => {
     expect(document.querySelectorAll('div.note').length).toEqual(1);
     expect(document.querySelectorAll('div.note')[0].innerText).toEqual('Go food shopping');
   });
 
-  it('clear the list of previous notes before displaying', () => {
-    document.body.innerHTML = fs.readFileSync('./index.html');
-    const model = new NotesModel();
-    const api = new NotesApi();
-    const view = new NotesView(model, api)
-    
-    const inputEl = document.querySelector('#add-note-input');
-    inputEl.value = 'Go food shopping';
-
-    fetch.mockResponseOnce(JSON.stringify({
-      note: 'Go to the gym'
-    }));
-    
-    const buttonEl = document.querySelector('#add-note-btn');
-    buttonEl.click();
-    
-    const inputEl2 = document.querySelector('#add-note-input');
-    inputEl2.value = 'Go to the gym';
+  it('clear the list of previous notes before displaying', () => {        
+    inputEl.value = 'Go to the gym';
 
     fetch.mockResponseOnce(JSON.stringify({
       note: 'Go to the cinema'
@@ -58,5 +50,4 @@ describe('Notes view', () => {
     
     expect(document.querySelectorAll('div.note').length).toEqual(2);
   })
-
 });
