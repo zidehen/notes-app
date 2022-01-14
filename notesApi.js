@@ -10,7 +10,7 @@ class NotesApi {
         console.error('Error', error);
       });
   }
-  emojify(note) {
+  emojify(note, callback1, callback2) {
     fetch('https://makers-emojify.herokuapp.com/', {
       method: 'POST',
       headers: {
@@ -23,9 +23,10 @@ class NotesApi {
     .then(response => {
       return response.json()
     })
-    .then(data => {console.log(data.emojified_text)
-    
-    this.createNote({ content: data.emojified_text })})
+    .then(data => {console.log(data.emojified_text);
+    callback1(data.emojified_text);
+    this.createNote({ content: data.emojified_text })
+    callback2(data.emojified_text)})
     .catch(err => console.log(`There is an error ${err}`))
   }
   createNote(note) {

@@ -14,7 +14,7 @@ const api = new NotesApi();
 
 const view = new NotesView(model, api)
 
-api.emojify({"text": ":fire:"})
+// api.emojify({"text": ":fire:"}, (data) => console.log(data), (data) => console.log(data))
 
 api.loadNotes((notes) => {
   notes.forEach(note => {

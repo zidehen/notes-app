@@ -50,8 +50,11 @@
           this.displayNotes();
         }
         addNewNote(newNote) {
-          this.model.addNote(newNote);
-          this.api.emojify({ "text": newNote });
+          this.api.emojify({ "text": newNote }, (data) => {
+            this.model.addNote(data);
+          }, () => {
+            this.displayNotes();
+          });
           this.displayNotes();
         }
         displayNotes() {
@@ -78,7 +81,7 @@
             console.error("Error", error);
           });
         }
-        emojify(note) {
+        emojify(note, callback1, callback2) {
           fetch("https://makers-emojify.herokuapp.com/", {
             method: "POST",
             headers: {
@@ -91,7 +94,9 @@
             return response.json();
           }).then((data) => {
             console.log(data.emojified_text);
+            callback1(data.emojified_text);
             this.createNote({ content: data.emojified_text });
+            callback2(data.emojified_text);
           }).catch((err) => console.log(`There is an error ${err}`));
         }
         createNote(note) {
@@ -128,7 +133,6 @@
   var model = new NotesModel();
   var api = new NotesApi();
   var view = new NotesView(model, api);
-  api.emojify({ "text": ":fire:" });
   api.loadNotes((notes) => {
     notes.forEach((note) => {
       model.addNote(note);
