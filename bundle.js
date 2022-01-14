@@ -55,7 +55,6 @@
           }, () => {
             this.displayNotes();
           });
-          this.displayNotes();
         }
         displayNotes() {
           document.querySelectorAll("div.note").forEach((note) => note.remove());
