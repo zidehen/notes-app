@@ -27,6 +27,18 @@ class NotesApi {
     });
   }
 
+  resetNotes() {
+    fetch('http://localhost:3000/notes', {
+      method: 'DELETE', 
+    })
+    .then(response => {
+      return response.json()
+    })
+    .catch((error) => {
+      console.error('Error', error);
+    });
+  }
+
 }
 
 module.exports = NotesApi;

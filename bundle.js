@@ -33,12 +33,21 @@
           this.model = model2;
           this.mainContainerEl = document.querySelector("#main-container");
           this.buttonEl = document.querySelector("#add-note-btn");
+          this.resetButtonEl = document.querySelector("#reset-btn");
           this.api = api2;
           this.buttonEl.addEventListener("click", () => {
             let newNote = document.querySelector("#add-note-input");
             this.addNewNote(newNote.value);
             newNote.value = null;
           });
+          this.resetButtonEl.addEventListener("click", () => {
+            this.resetNotes();
+          });
+        }
+        resetNotes() {
+          this.model.reset();
+          this.api.resetNotes();
+          this.displayNotes();
         }
         addNewNote(newNote) {
           this.model.addNote(newNote);
@@ -76,6 +85,15 @@
               "Content-Type": "application/json"
             },
             body: JSON.stringify(note)
+          }).then((response) => {
+            return response.json();
+          }).catch((error) => {
+            console.error("Error", error);
+          });
+        }
+        resetNotes() {
+          fetch("http://localhost:3000/notes", {
+            method: "DELETE"
           }).then((response) => {
             return response.json();
           }).catch((error) => {

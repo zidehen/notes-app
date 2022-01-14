@@ -32,4 +32,18 @@ describe('NotesApi class', () => {
     });
   })
 
+  it('deletes all notes from the server', () => {
+    api.createNote({content: 'Go to the gym'})
+
+    fetch.mockResponseOnce(JSON.stringify({
+  
+    }));
+    
+    api.resetNotes()
+
+    api.loadNotes((info) => {
+      expect(info.note).toBeFalsy;
+    });
+  })
+
 })

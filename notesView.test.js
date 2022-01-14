@@ -28,6 +28,8 @@ describe('Notes view', () => {
     inputEl.value = 'Go food shopping'
 
     buttonEl = document.querySelector('#add-note-btn');
+    resetButtonEl = document.querySelector('#reset-btn');
+
     fetch.mockResponseOnce(JSON.stringify({
       note: 'Go to the gym'
     }));
@@ -50,4 +52,9 @@ describe('Notes view', () => {
     
     expect(document.querySelectorAll('div.note').length).toEqual(2);
   })
-});
+
+  it('clears the list of notes', () => {
+    resetButtonEl.click()
+    expect(document.querySelectorAll('div.note').length).toEqual(0);
+  });
+})

@@ -4,7 +4,7 @@ class NotesView {
     this.model = model;
     this.mainContainerEl = document.querySelector('#main-container');
     this.buttonEl = document.querySelector('#add-note-btn');
-    
+    this.resetButtonEl = document.querySelector('#reset-btn');
     this.api = api;
 
     this.buttonEl.addEventListener('click', () => {
@@ -12,8 +12,18 @@ class NotesView {
       this.addNewNote(newNote.value);
       newNote.value = null;
    });
+
+   this.resetButtonEl.addEventListener('click', () => {
+     this.resetNotes();
+   });
   }
   
+  resetNotes() {
+    this.model.reset()
+    this.api.resetNotes()
+    this.displayNotes();
+  }
+
   addNewNote(newNote) {
     this.model.addNote(newNote);
     this.api.createNote({ content: newNote });
