@@ -10,7 +10,24 @@ class NotesApi {
         console.error('Error', error);
       });
   }
-
+  emojify(note) {
+    fetch('https://makers-emojify.herokuapp.com/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(note), 
+      credentials: "omit",
+      mode: "cors",
+    })
+    .then(response => {
+      return response.json()
+    })
+    .then(data => {console.log(data.emojified_text)
+    
+    this.createNote({ content: data.emojified_text })})
+    .catch(err => console.log(`There is an error ${err}`))
+  }
   createNote(note) {
     fetch('http://localhost:3000/notes', {
       method: 'POST', 
